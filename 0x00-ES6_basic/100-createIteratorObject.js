@@ -1,11 +1,11 @@
 export default function createIteratorObject(report) {
-  const employees = [];
+  const allEmployees = [];
 
-  // Gather all employees from each department
+  // Extract all employees from each department and push them to the allEmployees array
   for (const department in report.allEmployees) {
-    employees.push(...report.allEmployees[department]);
+    allEmployees.push(...report.allEmployees[department]);
   }
 
-  // Create an iterator for the employees array
-  return employees[Symbol.iterator]();
+  // Return an iterator over the employees array
+  return allEmployees[Symbol.iterator]();
 }
