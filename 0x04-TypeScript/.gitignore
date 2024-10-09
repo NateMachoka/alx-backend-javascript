@@ -2,3 +2,4 @@
 *.ts~
 *.json~
 node_modules/
+*~
