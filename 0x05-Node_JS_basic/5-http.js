@@ -6,11 +6,9 @@ const app = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
 
   if (parsedUrl.pathname === '/') {
-    // Root path: Display a welcome message
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello Holberton School!');
   } else if (parsedUrl.pathname === '/students') {
-    // Students path: Display student information
     const databasePath = process.argv[2];
 
     res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -22,9 +20,8 @@ const app = http.createServer(async (req, res) => {
     }
 
     try {
-      // Use the result of countStudents to build the response
-      const studentsInfo = await countStudents(databasePath);
-      res.end(studentsInfo);
+      const result = await countStudents(databasePath); // Get data
+      res.end(result); // Send data in the response
     } catch (error) {
       res.end(`${error.message}\n`);
     }

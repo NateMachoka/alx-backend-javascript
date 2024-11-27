@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 /**
  * Counts the number of students asynchronously
  * @param {string} filePath File path
+ * @returns {Promise<string>} Formatted student data
  */
 async function countStudents(filePath) {
   try {
@@ -19,8 +20,6 @@ async function countStudents(filePath) {
       .map((line) => line.split(','))
       .filter((fields) => fields.length === 4);
 
-    console.log(`Number of students: ${students.length}`);
-
     const fieldMap = {};
     students.forEach((student) => {
       const field = student[3];
@@ -31,13 +30,15 @@ async function countStudents(filePath) {
       fieldMap[field].push(firstName);
     });
 
+    // Prepare output
+    let output = `Number of students: ${students.length}`;
     for (const [field, names] of Object.entries(fieldMap)) {
-      console.log(
-        `Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`,
-      );
+      output += `\nNumber of students in ${field}: ${names.length}. List: ${names.join(', ')}`;
     }
+
+    return output;
   } catch (error) {
-    console.error('Cannot load the database');
+    throw new Error('Cannot load the database');
   }
 }
 
