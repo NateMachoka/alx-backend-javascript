@@ -22,23 +22,18 @@ const app = http.createServer(async (req, res) => {
     }
 
     try {
-      await countStudents(databasePath);
+      // Use the result of countStudents to build the response
+      const studentsInfo = await countStudents(databasePath);
+      res.end(studentsInfo);
     } catch (error) {
       res.end(`${error.message}\n`);
-      return;
-    }
-
-    try {
-      const result = await countStudents(databasePath);
-      res.end(result);
-    } catch (error) {
-	      res.end(`${error.message}\n`);
     }
   } else {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('Not Found');
   }
 });
+
 app.listen(1245);
 
 module.exports = app;
