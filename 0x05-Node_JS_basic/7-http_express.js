@@ -30,7 +30,7 @@ async function countStudents(path) {
 
     const totalStudents = Object.values(studentsByField).reduce(
       (acc, list) => acc + list.length,
-      0
+      0,
     );
 
     let message = `Number of students: ${totalStudents}\n`;

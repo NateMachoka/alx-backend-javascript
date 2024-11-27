@@ -6,4 +6,4 @@ process.stdin.on('data', (data) => {
 
     console.log('This important software is now closing');
     process.exit();
-})
+});
