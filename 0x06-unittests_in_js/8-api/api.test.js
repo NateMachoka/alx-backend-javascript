@@ -12,7 +12,8 @@ describe('Index page', () => {
     chai
       .request(app)
       .get('/')
-      .end((err, res) => {
+      .end((err, res, body) => {
+        expect(err).to.be.null;
         expect(res).to.have.status(200);
         done();
       });
@@ -22,7 +23,8 @@ describe('Index page', () => {
     chai
       .request(app)
       .get('/')
-      .end((err, res) => {
+      .end((err, res, body) => {
+        expect(err).to.be.null;
         expect(res.text).to.equal('Welcome to the payment system');
         done();
       });
@@ -32,7 +34,8 @@ describe('Index page', () => {
     chai
       .request(app)
       .get('/')
-      .end((err, res) => {
+      .end((err, res, body) => {
+        expect(err).to.be.null;
         expect(res.ok).to.be.true;
         done();
       });
@@ -42,10 +45,23 @@ describe('Index page', () => {
     chai
       .request(app)
       .get('/')
-      .end((err, res) => {
+      .end((err, res, body) => {
+        expect(err).to.be.null;
         const hostname = res.request.host.split(':')[0];
         expect(hostname).to.equal('127.0.0.1');
         done();
       });
+  });
+
+  it('should have the correct port', (done) => {
+  chai
+    .request(app)
+    .get('/')
+    .end((err, res, body) => {
+      expect(err).to.be.null;
+      const port = res.request.host.split(':')[1];
+      expect(port).to.be.a('string');
+      done();
+    });
   });
 });
