@@ -9,8 +9,8 @@ app.get('/', (req, res) => {
 });
 
 // Start the server
-const PORT = 7865;
-app.listen(PORT, () => {
+const PORT = 7865
+app.listen(PORT, 'localhost', () => {
   console.log(`API available on localhost port ${PORT}`);
 });
 

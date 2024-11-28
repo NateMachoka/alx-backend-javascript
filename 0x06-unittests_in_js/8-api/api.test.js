@@ -37,4 +37,15 @@ describe('Index page', () => {
         done();
       });
   });
+
+  it('should have the correct hostname', (done) => {
+    chai
+      .request(app)
+      .get('/')
+      .end((err, res) => {
+        const hostname = res.request.host.split(':')[0];
+        expect(hostname).to.equal('127.0.0.1');
+        done();
+      });
+  });
 });
